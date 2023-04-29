@@ -1,0 +1,177 @@
+const keyboardKeys = [
+  {
+    row: 0, code: 'Backquote', en: '`', enShift: '~', ru: 'ё', ruShift: 'Ё',
+  }, {
+    row: 0, code: 'Digit1', en: '1', enShift: '!', ru: '1', ruShift: '!',
+  }, {
+    row: 0, code: 'Digit2', en: '2', enShift: '@', ru: '2', ruShift: '"',
+  }, {
+    row: 0, code: 'Digit3', en: '3', enShift: '#', ru: '3', ruShift: '№',
+  }, {
+    row: 0, code: 'Digit4', en: '4', enShift: '$', ru: '4', ruShift: ';',
+  }, {
+    row: 0, code: 'Digit5', en: '5', enShift: '%', ru: '5', ruShift: '%',
+  }, {
+    row: 0, code: 'Digit6', en: '6', enShift: '^', ru: '6', ruShift: ':',
+  }, {
+    row: 0, code: 'Digit7', en: '7', enShift: '&', ru: '7', ruShift: '?',
+  }, {
+    row: 0, code: 'Digit8', en: '8', enShift: '*', ru: '8', ruShift: '*',
+  }, {
+    row: 0, code: 'Digit9', en: '9', enShift: '(', ru: '9', ruShift: '(',
+  }, {
+    row: 0, code: 'Digit0', en: '0', enShift: ')', ru: '0', ruShift: ')',
+  }, {
+    row: 0, code: 'Minus', en: '-', enShift: '_', ru: '-', ruShift: '_',
+  }, {
+    row: 0, code: 'Equal', en: '=', enShift: '+', ru: '=', ruShift: '+',
+  }, {
+    row: 0, code: 'Backspace', serviceKey: true, en: 'backspace',
+  },
+  {
+    row: 1, code: 'Tab', serviceKey: true, en: 'tab',
+  }, {
+    row: 1, code: 'KeyQ', en: 'q', enShift: 'Q', ru: 'й', ruShift: 'Й',
+  }, {
+    row: 1, code: 'KeyW', en: 'w', enShift: 'W', ru: 'ц', ruShift: 'Ц',
+  }, {
+    row: 1, code: 'KeyE', en: 'e', enShift: 'E', ru: 'у', ruShift: 'У',
+  }, {
+    row: 1, code: 'KeyR', en: 'r', enShift: 'R', ru: 'к', ruShift: 'К',
+  }, {
+    row: 1, code: 'KeyT', en: 't', enShift: 'T', ru: 'е', ruShift: 'Е',
+  }, {
+    row: 1, code: 'KeyY', en: 'y', enShift: 'Y', ru: 'н', ruShift: 'Н',
+  }, {
+    row: 1, code: 'KeyU', en: 'u', enShift: 'U', ru: 'г', ruShift: 'Г',
+  }, {
+    row: 1, code: 'KeyI', en: 'i', enShift: 'I', ru: 'ш', ruShift: 'Ш',
+  }, {
+    row: 1, code: 'KeyO', en: 'o', enShift: 'O', ru: 'щ', ruShift: 'Щ',
+  }, {
+    row: 1, code: 'KeyP', en: 'p', enShift: 'P', ru: 'з', ruShift: 'З',
+  }, {
+    row: 1, code: 'BracketLeft', en: '[', enShift: '{', ru: 'х', ruShift: 'Х',
+  }, {
+    row: 1, code: 'BracketRight', en: ']', enShift: '}', ru: 'ъ', ruShift: 'Ъ',
+  }, {
+    row: 1, code: 'Backslash', en: '\\', enShift: '|', ru: '\\', ruShift: '/',
+  }, {
+    row: 1, code: 'Delete', serviceKey: true, en: 'del',
+  },
+  {
+    row: 2, code: 'CapsLock', serviceKey: true, en: 'capslock',
+  }, {
+    row: 2, code: 'KeyA', en: 'a', enShift: 'A', ru: 'ф', ruShift: 'Ф',
+  }, {
+    row: 2, code: 'KeyS', en: 's', enShift: 'S', ru: 'ы', ruShift: 'Ы',
+  }, {
+    row: 2, code: 'KeyD', en: 'd', enShift: 'D', ru: 'в', ruShift: 'В',
+  }, {
+    row: 2, code: 'KeyF', en: 'f', enShift: 'F', ru: 'а', ruShift: 'А',
+  }, {
+    row: 2, code: 'KeyG', en: 'g', enShift: 'G', ru: 'п', ruShift: 'П',
+  }, {
+    row: 2, code: 'KeyH', en: 'h', enShift: 'H', ru: 'р', ruShift: 'Р',
+  }, {
+    row: 2, code: 'KeyJ', en: 'j', enShift: 'J', ru: 'о', ruShift: 'О',
+  }, {
+    row: 2, code: 'KeyK', en: 'k', enShift: 'K', ru: 'л', ruShift: 'Л',
+  }, {
+    row: 2, code: 'KeyL', en: 'l', enShift: 'L', ru: 'д', ruShift: 'Д',
+  }, {
+    row: 2, code: 'Semicolon', en: ';', enShift: ':', ru: 'ж', ruShift: 'Ж',
+  }, {
+    row: 2, code: 'Quote', en: "'", enShift: '"', ru: 'э', ruShift: 'Э',
+  }, {
+    row: 2, code: 'Enter', serviceKey: true, en: 'enter',
+  },
+  {
+    row: 3, code: 'ShiftLeft', serviceKey: true, en: 'shift',
+  }, {
+    row: 3, code: 'KeyZ', en: 'z', enShift: 'Z', ru: 'я', ruShift: 'Я',
+  }, {
+    row: 3, code: 'KeyX', en: 'x', enShift: 'X', ru: 'ч', ruShift: 'Ч',
+  }, {
+    row: 3, code: 'KeyC', en: 'c', enShift: 'C', ru: 'с', ruShift: 'С',
+  }, {
+    row: 3, code: 'KeyV', en: 'v', enShift: 'V', ru: 'м', ruShift: 'М',
+  }, {
+    row: 3, code: 'KeyB', en: 'b', enShift: 'B', ru: 'и', ruShift: 'И',
+  }, {
+    row: 3, code: 'KeyN', en: 'n', enShift: 'N', ru: 'т', ruShift: 'Т',
+  }, {
+    row: 3, code: 'KeyM', en: 'm', enShift: 'M', ru: 'ь', ruShift: 'Ь',
+  }, {
+    row: 3, code: 'Comma', en: ',', enShift: '<', ru: 'б', ruShift: 'Б',
+  }, {
+    row: 3, code: 'Period', en: '.', enShift: '>', ru: 'ю', ruShift: 'Ю',
+  }, {
+    row: 3, code: 'Slash', en: '/', enShift: '?', ru: '.', ruShift: ',',
+  }, {
+    row: 3, code: 'ArrowUp', serviceKey: true, en: '↑',
+  }, {
+    row: 3, code: 'ShiftRight', serviceKey: true, en: 'shift',
+  },
+  {
+    row: 4, code: 'ControlLeft', serviceKey: true, en: 'ctrl',
+  }, {
+    row: 4, code: 'MetaLeft', serviceKey: true, en: 'win',
+  }, {
+    row: 4, code: 'AltLeft', serviceKey: true, en: 'alt',
+  }, {
+    row: 4, code: 'Space', serviceKey: true, en: 'space',
+  }, {
+    row: 4, code: 'ArrowLeft', serviceKey: true, en: '←',
+  }, {
+    row: 4, code: 'ArrowDown', serviceKey: true, en: '↓',
+  }, {
+    row: 4, code: 'ArrowRight', serviceKey: true, en: '→',
+  }, {
+    row: 4, code: 'AltRight', serviceKey: true, en: 'alt',
+  }, {
+    row: 4, code: 'ControlRight', serviceKey: true, en: 'ctrl',
+  },
+];
+
+// eslint-disable-next-line no-unused-vars
+const languages = ['en', 'enShift', 'ru', 'ruShift'];
+const language = 'en';
+
+function createKeyboard(place) {
+  let currentRow = -1;
+  keyboardKeys.forEach((key) => {
+    if (currentRow !== key.row) {
+      const row = document.createElement('div');
+      row.classList.add('keyboard_row');
+      place.append(row);
+      currentRow = key.row;
+    }
+    const button = document.createElement('button');
+    button.classList.add(key.code);
+    button.innerHTML = key.serviceKey ? key.en : key[language];
+    place.querySelectorAll('.keyboard_row')[currentRow].append(button);
+  });
+}
+
+window.onload = () => {
+  const heading = document.createElement('h1');
+  heading.innerHTML = 'Virtual keyboard';
+  heading.classList.add('heading');
+  document.body.append(heading);
+
+  const textarea = document.createElement('textarea');
+  textarea.classList.add('textarea');
+  document.body.append(textarea);
+
+  const keyboardWrapper = document.createElement('div');
+  keyboardWrapper.classList.add('keyboard_wrapper');
+  document.body.append(keyboardWrapper);
+
+  createKeyboard(keyboardWrapper);
+
+  const tip = document.createElement('h3');
+  tip.innerHTML = 'Переключение языка ввода: ';
+  tip.classList.add('tip');
+  document.body.append(tip);
+};

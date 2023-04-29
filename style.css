@@ -1,0 +1,82 @@
+.body {
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+}
+
+.heading, .tip {
+    text-align: center;
+    color: #000050;
+    margin: 1em;
+}
+
+.heading {
+    font-size: 3em;
+}
+
+.tip {
+    font-size: 2em;
+}
+
+.textarea {
+    width: 1000px;
+    height: 250px;
+    align-self: center;
+    border-color: yellowgreen;
+    border-width: 5px;
+    margin: 1em;
+}
+
+.keyboard_wrapper {
+    width: 1000px;
+    height: 330px;
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    background-color: #54575B;
+    align-self: center;
+}
+
+.keyboard_row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.5em 0.2em;
+    height: 50px;
+    justify-content: space-between;
+}
+
+button {
+    width: 50px;
+    font-size: 1em;
+    font-weight: 700;
+    border-width: 5px;
+    background-color: goldenrod;
+}
+
+button:hover {
+    background-color: rgb(125, 218, 32);
+}
+
+.Backspace {
+    width: 220px;
+}
+
+.Tab, .Delete {
+    width: 100px;
+}
+
+.Enter, .CapsLock {
+    width: 160px;
+}
+
+.ShiftLeft {
+    width: 140px;
+}
+
+.ShiftRight {
+    width: 170px;
+}
+
+.Space {
+    width: 510px;
+}
