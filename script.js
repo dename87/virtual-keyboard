@@ -138,6 +138,7 @@ const keyboardKeys = [
 const languages = ['en', 'enShift', 'ru', 'ruShift'];
 let language = 'en';
 let updated;
+let capsLockOn = false;
 
 function createKeyboard(place) {
   let currentRow = -1;
@@ -169,6 +170,21 @@ function updateKeyboard(place, action) {
         document.querySelector(`.${button.classList.value}`).innerHTML = info[language];
       }
     }
+    if (action === 'Shift') {
+      if (!info.serviceKey) {
+        document.querySelector(`.${button.classList.value}`).innerHTML = info[language];
+      }
+    }
+    if (action === 'unShift' && !capsLockOn) {
+      if (!info.serviceKey) {
+        document.querySelector(`.${button.classList.value}`).innerHTML = info[language];
+      }
+    }
+    if (action === 'unShift' && capsLockOn) {
+      if (!info.serviceKey) {
+        document.querySelector(`.${button.classList.value}`).innerHTML = info[language].toUpperCase();
+      }
+    }
   });
 }
 
@@ -193,13 +209,25 @@ window.onload = () => {
   tip.classList.add('tip');
   document.body.append(tip);
 
-  let capsLockOn = false;
+  let command;
 
   document.addEventListener('keydown', (event) => {
     if (event.code === 'CapsLock') {
-      capsLockOn = !capsLockOn; // Инвертировать значение флага capsLockOn
+      capsLockOn = !capsLockOn;
+      command = capsLockOn ? 'Caps' : 'unCaps';
+      updateKeyboard(keyboardWrapper, command);
     }
-    const command = capsLockOn ? 'Caps' : 'unCaps';
-    updateKeyboard(keyboardWrapper, command);
+    if (event.key === 'Shift') {
+      command = 'Shift';
+      language = `${language}Shift`;
+      updateKeyboard(keyboardWrapper, command);
+    }
+  });
+  document.addEventListener('keyup', (event) => {
+    if (event.key === 'Shift') {
+      command = 'unShift';
+      language = language.slice(0, 2);
+      updateKeyboard(keyboardWrapper, command);
+    }
   });
 };
