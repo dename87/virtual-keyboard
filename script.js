@@ -272,6 +272,8 @@ window.onload = () => {
     }
     const keyUnpressed = keyboardKeys.find((key) => key.code === event.code);
     const buttonUnpressed = document.querySelector(`.${keyUnpressed.code}`);
-    buttonUnpressed.classList.remove('active');
+    if (keyUnpressed.code !== 'CapsLock' || (keyUnpressed.code === 'CapsLock' && !capsLockOn)) {
+      buttonUnpressed.classList.remove('active');
+    }
   });
 };
