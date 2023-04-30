@@ -136,9 +136,11 @@ const keyboardKeys = [
 
 // eslint-disable-next-line no-unused-vars
 const languages = ['en', 'enShift', 'ru', 'ruShift'];
-let language = 'en';
+let language = localStorage.getItem('languageStored') || 'en';
 let updated;
 let capsLockOn = false;
+let ctrlOn = false;
+let altOn = false;
 
 function createKeyboard(place) {
   let currentRow = -1;
@@ -185,6 +187,16 @@ function updateKeyboard(place, action) {
         document.querySelector(`.${button.classList.value}`).innerHTML = info[language].toUpperCase();
       }
     }
+    if (action === 'lang' && !capsLockOn) {
+      if (!info.serviceKey) {
+        document.querySelector(`.${button.classList.value}`).innerHTML = info[language];
+      }
+    }
+    if (action === 'lang' && capsLockOn) {
+      if (!info.serviceKey) {
+        document.querySelector(`.${button.classList.value}`).innerHTML = info[language].toUpperCase();
+      }
+    }
   });
 }
 
@@ -205,7 +217,7 @@ window.onload = () => {
   createKeyboard(keyboardWrapper);
 
   const tip = document.createElement('h3');
-  tip.innerHTML = 'Переключение языка ввода: ';
+  tip.innerHTML = 'Переключение языка ввода: Alt + Ctrl';
   tip.classList.add('tip');
   document.body.append(tip);
 
@@ -222,12 +234,32 @@ window.onload = () => {
       language = `${language}Shift`;
       updateKeyboard(keyboardWrapper, command);
     }
+    if (event.key === 'Control') {
+      ctrlOn = true;
+    }
+    if (event.key === 'Alt') {
+      altOn = true;
+    }
+    if (ctrlOn && altOn) {
+      language = language.slice(0, 2) === 'en' ? 'ru' : 'en';
+      localStorage.setItem('languageStored', language.slice(0, 2));
+      command = 'lang';
+      updateKeyboard(keyboardWrapper, command);
+      ctrlOn = false;
+      altOn = false;
+    }
   });
   document.addEventListener('keyup', (event) => {
     if (event.key === 'Shift') {
       command = 'unShift';
       language = language.slice(0, 2);
       updateKeyboard(keyboardWrapper, command);
+    }
+    if (event.key === 'Control') {
+      ctrlOn = false;
+    }
+    if (event.key === 'Alt') {
+      altOn = false;
     }
   });
 };
