@@ -134,8 +134,6 @@ const keyboardKeys = [
   },
 ];
 
-// eslint-disable-next-line no-unused-vars
-const languages = ['en', 'enShift', 'ru', 'ruShift'];
 let language = localStorage.getItem('languageStored') || 'en';
 let updated;
 let capsLockOn = false;
@@ -161,40 +159,41 @@ function createKeyboard(place) {
 function updateKeyboard(place, action) {
   updated = place.querySelectorAll('button');
   updated.forEach((button) => {
-    const info = keyboardKeys.find((key) => key.code === `${button.classList.value}`);
+    const classListValue = button.classList.value.replace('active', '').trim();
+    const info = keyboardKeys.find((key) => key.code === `${classListValue}`);
     if (action === 'Caps') {
       if (!info.serviceKey) {
-        document.querySelector(`.${button.classList.value}`).innerHTML = info[language].toUpperCase();
+        document.querySelector(`.${classListValue}`).innerHTML = info[language].toUpperCase();
       }
     }
     if (action === 'unCaps') {
       if (!info.serviceKey) {
-        document.querySelector(`.${button.classList.value}`).innerHTML = info[language];
+        document.querySelector(`.${classListValue}`).innerHTML = info[language];
       }
     }
     if (action === 'Shift') {
       if (!info.serviceKey) {
-        document.querySelector(`.${button.classList.value}`).innerHTML = info[language];
+        document.querySelector(`.${classListValue}`).innerHTML = info[language];
       }
     }
     if (action === 'unShift' && !capsLockOn) {
       if (!info.serviceKey) {
-        document.querySelector(`.${button.classList.value}`).innerHTML = info[language];
+        document.querySelector(`.${classListValue}`).innerHTML = info[language];
       }
     }
     if (action === 'unShift' && capsLockOn) {
       if (!info.serviceKey) {
-        document.querySelector(`.${button.classList.value}`).innerHTML = info[language].toUpperCase();
+        document.querySelector(`.${classListValue}`).innerHTML = info[language].toUpperCase();
       }
     }
     if (action === 'lang' && !capsLockOn) {
       if (!info.serviceKey) {
-        document.querySelector(`.${button.classList.value}`).innerHTML = info[language];
+        document.querySelector(`.${classListValue}`).innerHTML = info[language];
       }
     }
     if (action === 'lang' && capsLockOn) {
       if (!info.serviceKey) {
-        document.querySelector(`.${button.classList.value}`).innerHTML = info[language].toUpperCase();
+        document.querySelector(`.${classListValue}`).innerHTML = info[language].toUpperCase();
       }
     }
   });
@@ -220,7 +219,10 @@ window.onload = () => {
   tip.innerHTML = 'Переключение языка ввода: Alt + Ctrl';
   tip.classList.add('tip');
   document.body.append(tip);
-
+  textarea.focus();
+  textarea.addEventListener('blur', () => {
+    textarea.focus();
+  });
   let command;
 
   document.addEventListener('keydown', (event) => {
@@ -248,6 +250,13 @@ window.onload = () => {
       ctrlOn = false;
       altOn = false;
     }
+    const keyPressed = keyboardKeys.find((key) => key.code === event.code);
+    const buttonPressed = document.querySelector(`.${keyPressed.code}`);
+    buttonPressed.classList.add('active');
+    if (!keyPressed.serviceKey) {
+      event.preventDefault();
+      textarea.value += keyPressed[language];
+    }
   });
   document.addEventListener('keyup', (event) => {
     if (event.key === 'Shift') {
@@ -261,5 +270,8 @@ window.onload = () => {
     if (event.key === 'Alt') {
       altOn = false;
     }
+    const keyUnpressed = keyboardKeys.find((key) => key.code === event.code);
+    const buttonUnpressed = document.querySelector(`.${keyUnpressed.code}`);
+    buttonUnpressed.classList.remove('active');
   });
 };

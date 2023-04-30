@@ -56,6 +56,10 @@ button {
 button:hover {
     background-color: rgb(125, 218, 32);
 }
+button.active {
+    background-color: rgb(125, 218, 32);
+    border-style: inset;
+}
 
 .Backspace {
     width: 220px;
