@@ -276,4 +276,65 @@ window.onload = () => {
       buttonUnpressed.classList.remove('active');
     }
   });
+  keyboardWrapper.addEventListener('mousedown', (event) => {
+    let mouseEvent = event.target.classList.value;
+    mouseEvent = mouseEvent === 'CapsLock active' ? 'CapsLock' : mouseEvent;
+    if (mouseEvent === 'CapsLock') {
+      capsLockOn = !capsLockOn;
+      command = capsLockOn ? 'Caps' : 'unCaps';
+      updateKeyboard(keyboardWrapper, command);
+    }
+    if (mouseEvent.includes('Shift')) {
+      command = 'Shift';
+      language = `${language}Shift`;
+      updateKeyboard(keyboardWrapper, command);
+    }
+    if (mouseEvent.includes('Control')) {
+      ctrlOn = true;
+    }
+    if (mouseEvent.includes('Alt')) {
+      altOn = true;
+    }
+    if (ctrlOn && altOn) {
+      language = language.slice(0, 2) === 'en' ? 'ru' : 'en';
+      localStorage.setItem('languageStored', language.slice(0, 2));
+      command = 'lang';
+      updateKeyboard(keyboardWrapper, command);
+      ctrlOn = false;
+      altOn = false;
+    }
+    const keyPressed = keyboardKeys.find((key) => key.code === mouseEvent);
+    const buttonPressed = document.querySelector(`.${keyPressed.code}`);
+    buttonPressed.classList.add('active');
+    if (!keyPressed.serviceKey) {
+      textarea.value += capsLockOn ? keyPressed[language].toUpperCase() : keyPressed[language];
+    }
+    if (keyPressed.code === 'Space') {
+      textarea.value += ' ';
+    }
+    if (keyPressed.code === 'Backspace') {
+      if (textarea.value.length > 0) {
+        textarea.value = textarea.value.substring(0, textarea.value.length - 1);
+      }
+    }
+  });
+  keyboardWrapper.addEventListener('mouseup', (event) => {
+    const mouseUpEvent = event.target.classList.value.replace('active', '').trim();
+    if (mouseUpEvent.includes('Shift')) {
+      command = 'unShift';
+      language = language.slice(0, 2);
+      updateKeyboard(keyboardWrapper, command);
+    }
+    if (mouseUpEvent.includes('Control')) {
+      ctrlOn = false;
+    }
+    if (mouseUpEvent.includes('Alt')) {
+      altOn = false;
+    }
+    const keyUnpressed = keyboardKeys.find((key) => key.code === mouseUpEvent);
+    const buttonUnpressed = document.querySelector(`.${keyUnpressed.code}`);
+    if (keyUnpressed.code !== 'CapsLock' || (keyUnpressed.code === 'CapsLock' && !capsLockOn)) {
+      buttonUnpressed.classList.remove('active');
+    }
+  });
 };
