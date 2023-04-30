@@ -255,7 +255,7 @@ window.onload = () => {
     buttonPressed.classList.add('active');
     if (!keyPressed.serviceKey) {
       event.preventDefault();
-      textarea.value += keyPressed[language];
+      textarea.value += capsLockOn ? keyPressed[language].toUpperCase() : keyPressed[language];
     }
   });
   document.addEventListener('keyup', (event) => {
