@@ -251,11 +251,13 @@ window.onload = () => {
       altOn = false;
     }
     const keyPressed = keyboardKeys.find((key) => key.code === event.code);
-    const buttonPressed = document.querySelector(`.${keyPressed.code}`);
-    buttonPressed.classList.add('active');
-    if (!keyPressed.serviceKey) {
-      event.preventDefault();
-      textarea.value += capsLockOn ? keyPressed[language].toUpperCase() : keyPressed[language];
+    if (keyPressed != null) {
+      const buttonPressed = document.querySelector(`.${keyPressed.code}`);
+      buttonPressed.classList.add('active');
+      if (!keyPressed.serviceKey) {
+        event.preventDefault();
+        textarea.value += capsLockOn ? keyPressed[language].toUpperCase() : keyPressed[language];
+      }
     }
   });
   document.addEventListener('keyup', (event) => {
@@ -271,9 +273,11 @@ window.onload = () => {
       altOn = false;
     }
     const keyUnpressed = keyboardKeys.find((key) => key.code === event.code);
-    const buttonUnpressed = document.querySelector(`.${keyUnpressed.code}`);
-    if (keyUnpressed.code !== 'CapsLock' || (keyUnpressed.code === 'CapsLock' && !capsLockOn)) {
-      buttonUnpressed.classList.remove('active');
+    if (keyUnpressed != null) {
+      const buttonUnpressed = document.querySelector(`.${keyUnpressed.code}`);
+      if (keyUnpressed.code !== 'CapsLock' || (keyUnpressed.code === 'CapsLock' && !capsLockOn)) {
+        buttonUnpressed.classList.remove('active');
+      }
     }
   });
   keyboardWrapper.addEventListener('mousedown', (event) => {
@@ -304,17 +308,19 @@ window.onload = () => {
       altOn = false;
     }
     const keyPressed = keyboardKeys.find((key) => key.code === mouseEvent);
-    const buttonPressed = document.querySelector(`.${keyPressed.code}`);
-    buttonPressed.classList.add('active');
-    if (!keyPressed.serviceKey) {
-      textarea.value += capsLockOn ? keyPressed[language].toUpperCase() : keyPressed[language];
-    }
-    if (keyPressed.code === 'Space') {
-      textarea.value += ' ';
-    }
-    if (keyPressed.code === 'Backspace') {
-      if (textarea.value.length > 0) {
-        textarea.value = textarea.value.substring(0, textarea.value.length - 1);
+    if (keyPressed != null) {
+      const buttonPressed = document.querySelector(`.${keyPressed.code}`);
+      buttonPressed.classList.add('active');
+      if (!keyPressed.serviceKey) {
+        textarea.value += capsLockOn ? keyPressed[language].toUpperCase() : keyPressed[language];
+      }
+      if (keyPressed.code === 'Space') {
+        textarea.value += ' ';
+      }
+      if (keyPressed.code === 'Backspace') {
+        if (textarea.value.length > 0) {
+          textarea.value = textarea.value.substring(0, textarea.value.length - 1);
+        }
       }
     }
   });
@@ -332,9 +338,11 @@ window.onload = () => {
       altOn = false;
     }
     const keyUnpressed = keyboardKeys.find((key) => key.code === mouseUpEvent);
-    const buttonUnpressed = document.querySelector(`.${keyUnpressed.code}`);
-    if (keyUnpressed.code !== 'CapsLock' || (keyUnpressed.code === 'CapsLock' && !capsLockOn)) {
-      buttonUnpressed.classList.remove('active');
+    if (keyUnpressed != null) {
+      const buttonUnpressed = document.querySelector(`.${keyUnpressed.code}`);
+      if (keyUnpressed.code !== 'CapsLock' || (keyUnpressed.code === 'CapsLock' && !capsLockOn)) {
+        buttonUnpressed.classList.remove('active');
+      }
     }
   });
 };
